@@ -1,46 +1,44 @@
 import math
 import sys
 
-
-def calculate_final_energy(kutle_numarası, sacılma_acısı):
+def calculate_final_energy(mass_number, theta_degrees):
     e_initial = 1.0
-    theta_radians = math.radians(sacılma_acısı)
-
+    theta_radians = math.radians(theta_degrees)
+    
     try:
         term1 = math.cos(theta_radians)
-
-        sqrt_content = kutle_numarası ** 2 - math.sin(theta_radians) ** 2
-
+        
+        sqrt_content = mass_number**2 - math.sin(theta_radians)**2
+        
         if sqrt_content < 0:
             return None
-
+            
         term2 = math.sqrt(sqrt_content)
         numerator = term1 + term2
-        denominator = kutle_numarası + 1
-
+        denominator = mass_number + 1
+        
         factor = (numerator / denominator) ** 2
         e_final = e_initial * factor
-
+        
         return e_final
 
     except Exception:
         return None
 
-
 def main():
     try:
-        input_a = input("kutle numarası girin (A): ")
-        input_theta = input("sacılma acısı girin: ")
-
+        input_a = input("Enter Mass Number (A): ")
+        input_theta = input("Enter Scattering Angle (Theta in degrees): ")
+        
         a_value = float(input_a)
         theta_value = float(input_theta)
-
+        
         if a_value < 1:
             print("Error")
             return
 
         result = calculate_final_energy(a_value, theta_value)
-
+        
         if result is not None:
             print(result)
         else:
@@ -48,7 +46,6 @@ def main():
 
     except ValueError:
         print("Error")
-
 
 if __name__ == "__main__":
     main()
