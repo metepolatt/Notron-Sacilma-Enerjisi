@@ -1,0 +1,54 @@
+import math
+import sys
+
+
+def calculate_final_energy(kutle_numarası, sacılma_acısı):
+    e_initial = 1.0
+    theta_radians = math.radians(sacılma_acısı)
+
+    try:
+        term1 = math.cos(theta_radians)
+
+        sqrt_content = kutle_numarası ** 2 - math.sin(theta_radians) ** 2
+
+        if sqrt_content < 0:
+            return None
+
+        term2 = math.sqrt(sqrt_content)
+        numerator = term1 + term2
+        denominator = kutle_numarası + 1
+
+        factor = (numerator / denominator) ** 2
+        e_final = e_initial * factor
+
+        return e_final
+
+    except Exception:
+        return None
+
+
+def main():
+    try:
+        input_a = input("kutle numarası girin (A): ")
+        input_theta = input("sacılma acısı girin: ")
+
+        a_value = float(input_a)
+        theta_value = float(input_theta)
+
+        if a_value < 1:
+            print("Error")
+            return
+
+        result = calculate_final_energy(a_value, theta_value)
+
+        if result is not None:
+            print(result)
+        else:
+            print("Error")
+
+    except ValueError:
+        print("Error")
+
+
+if __name__ == "__main__":
+    main()
